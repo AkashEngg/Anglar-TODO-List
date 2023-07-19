@@ -1,0 +1,47 @@
+<div>
+
+    <div class="container py-5">
+        <h1 class="text-center py-3">Todo List By Akash</h1>
+        <h5>Add A Todo</h5>
+        <form (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <label for="title" class="form-label">Todo Title</label>
+                <input type="text" [(ngModel)]="title" name="title" class="form-control" id="title"
+                    aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Todo Description</label>
+                <input type="text" [(ngModel)]="desc" name="desc" class="form-control" id="exampleInputPassword1">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Todo</button>
+        </form>
+    </div>
+
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th scope="col" class="py-3">S No.</th>
+                <th scope="col" class="py-3">Title</th>
+                <th scope="col" class="py-3">Description</th>
+                <th scope="col" class="py-3">Action</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let todo of todos; index as i">
+            <tr>
+                <th scope="row">{{ rowCount(i) }}</th>
+                <td [ngClass]="{'strike': !todo.active}">{{todo.title}}</td>
+                <td [ngClass]="{'strike': !todo.active}">{{todo.desc}}</td>
+                <td>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1{{i}}"
+                            (click)="onCheckboxClick(todo)" [checked]="!todo.active">
+                        <label class="form-check-label" for="exampleCheck1{{i}}">Mark As Done</label>
+                    </div>
+                    <button class="btn btn-danger" (click)="deleteTodo(todo)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
